@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Game</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .game-container {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: red;
+            user-select: none;
+        }
+        #score {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="font-family: 'Playfair Display', serif;">Catch the Hearts! 💕</h1>
+    <p id="score">Score: 0</p>
+    <div class="game-container" id="gameContainer"></div>
+
+    <script>
+        let score = 0;
+        const gameContainer = document.getElementById("gameContainer");
+        const scoreDisplay = document.getElementById("score");
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 90 + "%";
+            heart.style.top = "-20px";
+            gameContainer.appendChild(heart);
+
+            let fallInterval = setInterval(() => {
+                heart.style.top = (parseInt(heart.style.top) + 5) + "px";
+                if (parseInt(heart.style.top) > 480) {
+                    heart.remove();
+                    clearInterval(fallInterval);
+                }
+            }, 100);
+
+            heart.onclick = function() {
+                score++;
+                scoreDisplay.textContent = "Score: " + score;
+                heart.remove();
+                clearInterval(fallInterval);
+            };
+        }
+
+        setInterval(createHeart, 1000);
+    </script>
+</body>
+</html>

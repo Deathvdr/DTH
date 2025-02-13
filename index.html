@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love Letter</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+            transition: opacity 2s ease-in-out;
+        }
+        .letter {
+            position: relative;
+            width: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            text-align: center;
+            transition: opacity 2s ease-in-out;
+        }
+        .question {
+            font-size: 2em;
+            color: #d63384;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        button {
+            font-size: 1.2em;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .yes {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        .no {
+            background-color: #ff758f;
+            color: white;
+        }
+        .yes:hover {
+            background-color: #d63384;
+        }
+        .no:hover {
+            background-color: #e85d75;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+        .full-screen-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('d.jpg') center/cover no-repeat;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="letter" id="letter">
+        <div class="question">My Dearest, Will you be my Valentine? 💌</div>
+        <div class="buttons">
+            <button class="yes" onmouseover="fillWithLove()" onclick="acceptLove()">Yes</button>
+            <button class="no" onmouseover="playMusicAndFade()" onclick="declineLove()">No</button>
+        </div>
+    </div>
+
+    <audio id="song-no" src="g.mp3"></audio>
+    <audio id="song-yes" src="h.mp3"></audio>
+    
+    <script>
+        function acceptLove() {
+            let letter = document.getElementById("letter");
+            let songYes = document.getElementById("song-yes");
+            songYes.play();
+            letter.classList.add("fade-out");
+            setTimeout(() => {
+                letter.innerHTML = "<h1 style='color: #d63384; font-size: 2.5em;'>You make my heart flutter! ❤️</h1><p style='font-size: 1.3em; font-style: italic;'>Forever yours, with love. Some games for you </p><img src='a.png' alt='Cute Cat' style='max-width: 80%; border-radius: 15px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2);'><br><a href='b.html' style='font-size: 1.5em; color: #d63384; text-decoration: none; font-weight: bold;'>Play Games</a>";
+                letter.classList.remove("fade-out");
+            }, 2000);
+        }
+        
+        function declineLove() {
+            let letter = document.getElementById("letter");
+            let body = document.body;
+            let image = document.createElement("div");
+            let songNo = document.getElementById("song-no");
+            songNo.play();
+            image.classList.add("full-screen-image");
+            body.appendChild(image);
+            letter.classList.add("fade-out");
+            setTimeout(() => {
+                image.style.opacity = 1;
+            }, 2000);
+        }
+        
+        function fillWithLove() {
+            for (let i = 0; i < 30; i++) {
+                let emoji = document.createElement("div");
+                emoji.innerHTML = "❤️";
+                emoji.style.position = "fixed";
+                emoji.style.left = Math.random() * 100 + "vw";
+                emoji.style.top = Math.random() * 100 + "vh";
+                emoji.style.fontSize = "2em";
+                emoji.style.opacity = 1;
+                emoji.style.transition = "opacity 2s ease-in-out";
+                document.body.appendChild(emoji);
+                setTimeout(() => {
+                    emoji.style.opacity = 0;
+                    setTimeout(() => emoji.remove(), 2000);
+                }, 500);
+            }
+        }
+        
+        function playMusicAndFade() {
+            let songNo = document.getElementById("song-no");
+            songNo.play();
+        }
+    </script>
+</body>
+</html>

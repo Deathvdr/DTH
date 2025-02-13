@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sealed Love Letter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .envelope {
+            position: relative;
+            width: 350px;
+            height: 250px;
+            background: #c0392b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: #a93226;
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+            transition: transform 1s ease-in-out;
+            transform-origin: top;
+        }
+        .seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: red;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transition: top 1s ease-in-out, opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope" id="envelope">
+        <div class="flap" id="flap"></div>
+        <div class="seal" id="seal">❤️</div>
+    </div>
+    <script>
+        document.getElementById('seal').addEventListener('click', function() {
+            document.getElementById('flap').style.transform = 'rotateX(180deg)';
+            document.getElementById('seal').style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1200); // Redirect after animation
+        });
+    </script>
+</body>
+</html>
